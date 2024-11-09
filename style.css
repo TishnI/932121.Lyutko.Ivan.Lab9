@@ -51,4 +51,9 @@ body
     grid-row: 3 / 5;
 }
 
+.calc-display__text
+{
+    color: #cccccc;
+}
+
 
