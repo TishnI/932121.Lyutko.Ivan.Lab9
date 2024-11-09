@@ -38,6 +38,9 @@ body
 {
     min-height: 72px;
     font-size: 30px;
+    border: 1px solid #a5a5a5;
+    background: rgb(218,217,217);
+    background: linear-gradient(0deg, rgba(218,217,217,1) 0%, rgba(255,255,255,1) 100%);
 }
 
 .calc-button--wide

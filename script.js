@@ -7,6 +7,7 @@ let operation = '';
 
 let isFloat = false;
 let errorReceived = false;
+let calculationIsFinish = false;
 
 const OPERATIONS = 
 {
@@ -24,7 +25,7 @@ const OPERATIONS =
 OPERATIONS.hasMathOperation = function(operation)
 {
     if(operation == OPERATIONS.sum 
-    || operation == OPERATIONS.substract 
+    || operation == OPERATIONS.substract
     || operation == OPERATIONS.multiply 
     || operation == OPERATIONS.division)
     {
@@ -61,10 +62,11 @@ const calculate = () =>
             return;
         }
 
-        calcSelectedTextElement.innerText = eval(firstOperand + operation + secondOperand);
+        calcSelectedTextElement.innerText = Math.round(eval(firstOperand + operation + secondOperand) * 10000000) / 10000000;
         calcTextElement.innerText = '';
         firstOperand = calcSelectedTextElement.innerText;
         isFloat = false;
+        calculationIsFinish = true;
     }
 };
 
@@ -139,6 +141,7 @@ buttonElements.map((button) =>
                 if(!OPERATIONS.hasMathOperation(calcSelectedTextElement.innerText) && calcTextElement.innerText != '')
                 {
                     calculate();
+                    calculationIsFinish = false;
                 }
                 
                 if(secondOperand != '')
@@ -176,9 +179,10 @@ buttonElements.map((button) =>
                 break;
                 
             default:
-                if(calcSelectedTextElement.innerText == '0')
+                if(calcSelectedTextElement.innerText == '0' || calculationIsFinish)
                 {
                     calcSelectedTextElement.innerText = buttonValue;
+                    calculationIsFinish = false;
                 }
                 else
                 {
